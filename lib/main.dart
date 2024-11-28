@@ -10,9 +10,10 @@
 
       @override
       Widget build(BuildContext context){
-        return const MaterialApp(
+        return MaterialApp(
+          theme: ThemeData(useMaterial3: true),
           title: "firstApp",
-          home: HomeScreen(),
+          home: const HomeScreen(),
         );
       }
     }
