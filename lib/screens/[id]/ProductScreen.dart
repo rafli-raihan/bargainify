@@ -73,7 +73,7 @@ import 'package:flutter/material.dart';
                               IconButton(
                                 onPressed: () {}, 
                                 icon: const Icon(
-                                  Icons.shopping_bag_rounded,
+                                  Icons.share_rounded,
                                   ),
                                 ),
                                 SizedBox(height: 2.0),
