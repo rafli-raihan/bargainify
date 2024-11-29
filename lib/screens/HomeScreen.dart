@@ -1,28 +1,11 @@
 import 'package:flutter/material.dart';
 
     class HomeScreen extends StatelessWidget{
-      const HomeScreen({Key? key}) : super(key: key);
+      const HomeScreen({super.key});
 
       @override
       Widget build(BuildContext context) {
           return Scaffold(
-            appBar: AppBar(
-              title: Text("Bargainify / home"),
-              actions: [
-                IconButton(
-                  onPressed: () {}, 
-                  icon: const Icon(
-                    Icons.search,
-                    color: Colors.black)
-                ),
-                IconButton(
-                  onPressed: () {}, 
-                  icon: const Icon(
-                    Icons.menu,
-                    color: Colors.black)
-                ),
-              ],
-            ),
             body: Container(
               alignment: Alignment.center,
               padding: EdgeInsets.fromLTRB(20, 10, 20, 10), // Kalo mw padding semua sisinya disamaian EdgeInset.all(jumlah nya)
