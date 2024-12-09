@@ -14,24 +14,23 @@ import 'package:flutter/material.dart';
                 children: <Widget>[
                   /* Product Photos */
                   Container(
-                    padding: EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(5.0),
                     child: 
                       ConstrainedBox(
                         constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width > 768 ? 768 : MediaQuery.of(context).size.width),
+                          maxWidth: MediaQuery.of(context).size.width > 768 ? 768 : MediaQuery.of(context).size.width,
+                          maxHeight: MediaQuery.of(context).size.height > 350 ? 350 : MediaQuery.of(context).size.height,),
                           child:
                             ListView(
                               scrollDirection: Axis.horizontal,
                               children: [
-                                Image.asset(
-                                  'images/RTX_4090_samping.jpg',
+                                Center(
+                                  child: 
+                                    Image.asset(
+                                      'images/RTX_4090_samping.jpg',
+                                    )
                                 ),
-                                Image.network(
-                                  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.4b5ow-C_cTwMFHN8YQLLOwHaEK%26pid%3DApi&f=1&ipt=1cbaadab9a5625f9b2a081a10ea9a36e6337d833564722e972c158729f062db6&ipo=images'
-                                ),
-                                Image.network(
-                                  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.4rwjd95FH-4KSxcY8CNesQHaEK%26pid%3DApi&f=1&ipt=b5af9a547981ff8f36f7851d6a737d1cb8c6e348e3b12240f6e50ae22dbd6e07&ipo=images'
-                                ),
+                                //tambahin fotonya lg disini
                               ],
                           ), // ListView itu gunanya kya container tapi bisa di scroll isinya
                       ),
