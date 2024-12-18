@@ -1,12 +1,11 @@
+import 'package:bargainify/models/Product.dart';
 import 'package:bargainify/screens/%5Bid%5D/ProductScreen.dart';
 import 'package:flutter/material.dart';
 
 class ProductsGrid extends StatelessWidget {
-  final List<String> products; // Accept a list of strings
+  final List<Product> products; // Accept a list of strings
 
   const ProductsGrid({super.key, required this.products});
-
-
 
   int getResponsiveGridCount(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -40,6 +39,7 @@ class ProductsGrid extends StatelessWidget {
       shrinkWrap: true, // Dynamic width sm height lah
       physics: NeverScrollableScrollPhysics(), // Jadi yg didalem "kotak bwt list product nya" gak bisa di scroll klo pake ini
       itemBuilder: (BuildContext context, int index) {
+        final product = products[index];
         return GestureDetector(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -47,38 +47,48 @@ class ProductsGrid extends StatelessWidget {
             }));
           },
           child:
-            Container(
-              height: 250,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: Colors.grey),
-                color: Colors.white54,
-              ),
-              margin: EdgeInsets.all(10.0),
-              padding: EdgeInsets.all(14.0),
-              child: 
-                Column(
-                  children: <Widget> [
-                    //Image.network(),
-                    Text(
-                      products[index], 
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
-                      softWrap: true, 
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                    ),
-                    Text(
-                      "Harga",
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
+          Card(
+            elevation: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /*Expanded(
+                  child: Image.asset(
+                    product.imageAsset,
+                  ),
+                ),*/
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                  ],
-              ),
+                      Text(
+                        product.price,
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Text(
+                        'Stock: ${product.stock}',
+                        style: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
+          ),
         );
       },
     );

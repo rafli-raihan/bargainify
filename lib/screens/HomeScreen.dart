@@ -1,18 +1,12 @@
 import 'package:bargainify/widgets/scrollables/ProductsGridView.dart';
 import 'package:flutter/material.dart';
+import 'package:bargainify/models/Product.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> productListing=[
-      "Nvidia RTX 4090 - Founders Edition 24GB GDDR6X",
-      "Redmi Note 7 4/64 - 2nd Mulus",                              // Nanti list ini ganti dari db kita fetch data
-      "LENOVO THINKPAD T480 I5 RAM 8GB INTERNAL 256GB HARGA TERMURAH",
-      "Apalah",
-      "Products no. 5"
-    ];  
 
     return Scaffold(
       body: ListView(
@@ -32,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             ),
             textAlign: TextAlign.start,
           ),
-          ProductsGrid(products: productListing)
+          ProductsGrid(products: productList)
           // Add more widgets here if needed
         ],
       ),
