@@ -26,12 +26,24 @@ class ProductsGrid extends StatelessWidget {
     }
   }
 
+  double getResponsiveAspectRatio(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double aspectRatio;
+    if (screenWidth < 600) {
+      return aspectRatio = 3/5; // 1:1 aspect ratio
+    } else if (screenWidth >= 600) {
+      return aspectRatio = 4/6; // 16:9 aspect ratio
+    } else {
+      return aspectRatio = 9/16; // fallback
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: getResponsiveGridCount(context), // Specify the number of columns
-        childAspectRatio: 1, // Set the aspect ratio of the child widgets
+        childAspectRatio: getResponsiveAspectRatio(context), // Set the aspect ratio of the child widgets
         mainAxisSpacing: 10, // Set the spacing between rows
         crossAxisSpacing: 10, // Set the spacing between columns
       ),
@@ -48,15 +60,22 @@ class ProductsGrid extends StatelessWidget {
           },
           child:
           Card(
+            clipBehavior: Clip.hardEdge,
             elevation: 3,
-            child: Column(
+            child:
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                /*Expanded(
-                  child: Image.asset(
-                    product.imageAsset,
+                AspectRatio(
+                  aspectRatio: 1, // Ensures a 1:1 ratio
+                  child: ClipRect(
+                    child: Image.asset(
+                      product.imageAsset,
+                      fit: BoxFit.cover, // Ensures the image fills the area
+                    ),
                   ),
-                ),*/
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -68,6 +87,7 @@ class ProductsGrid extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
+                        maxLines: 2,
                       ),
                       Text(
                         product.price,
