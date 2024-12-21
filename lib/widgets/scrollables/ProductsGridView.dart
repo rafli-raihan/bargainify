@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bargainify/models/Product.dart';
-import 'package:bargainify/screens/[id]/ProductScreen.dart';
+import 'package:bargainify/screens/ProductScreen.dart';
 
 class ProductsGrid extends StatelessWidget {
   final List<Product> products;
