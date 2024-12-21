@@ -1,79 +1,67 @@
+import 'package:flutter/material.dart';
 import 'package:bargainify/models/Product.dart';
 import 'package:bargainify/screens/%5Bid%5D/ProductScreen.dart';
-import 'package:flutter/material.dart';
 
 class ProductsGrid extends StatelessWidget {
-  final List<Product> products; // Accept a list of strings
+  final List<Product> products;
 
   const ProductsGrid({super.key, required this.products});
 
-  int getResponsiveGridCount(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    
-    switch (screenWidth) {
-      case < 600:
-        return 2; // Mobile Portrait
-      case >= 600 && < 1024:
-        return 3; // Medium (Mobile Landscape, Tablet, Foldables)
-      case >= 1024 && < 1280:
-        return 4; // Desktop Narrow
-      case >= 1280 && < 1536:
-        return 5; // Desktop Standard
-      case >= 1536:
-        return 6; // Desktop Ultrawide
-      default:
-        return 2; // Fallback
-    }
-  }
-
-  double getResponsiveAspectRatio(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double aspectRatio;
-    if (screenWidth < 600) {
-      return aspectRatio = 3/5; // 1:1 aspect ratio
-    } else if (screenWidth >= 600) {
-      return aspectRatio = 4/6; // 16:9 aspect ratio
-    } else {
-      return aspectRatio = 9/16; // fallback
-    }
+  double getResponsivePadding(BuildContext context){
+    return ( MediaQuery.of(context).size.width < 1024 ) ? 2 : 30;
   }
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: getResponsiveGridCount(context), // Specify the number of columns
-        childAspectRatio: getResponsiveAspectRatio(context), // Set the aspect ratio of the child widgets
-        mainAxisSpacing: 10, // Set the spacing between rows
-        crossAxisSpacing: 10, // Set the spacing between columns
+    return Padding(
+      padding: EdgeInsets.all(getResponsivePadding(context)),
+      child:
+    GridView.builder(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 250, // Maximum width for each grid item
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 3 / 4,
+        mainAxisExtent: 300,
       ),
       itemCount: products.length,
-      shrinkWrap: true, // Dynamic width sm height lah
-      physics: NeverScrollableScrollPhysics(), // Jadi yg didalem "kotak bwt list product nya" gak bisa di scroll klo pake ini
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         final product = products[index];
         return GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const ProductScreen();
-            }));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProductScreen()),
+            );
           },
-          child:
-          Card(
-            clipBehavior: Clip.hardEdge,
-            elevation: 3,
-            child:
-            Column(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 5,
+                  spreadRadius: 1,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
               children: [
-                AspectRatio(
-                  aspectRatio: 1, // Ensures a 1:1 ratio
-                  child: ClipRect(
-                    child: Image.asset(
-                      product.imageAsset,
-                      fit: BoxFit.cover, // Ensures the image fills the area
-                    ),
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
+                  child: Image.asset(
+                    product.imageAsset,
+                    height: 200,
+                    width: double.infinity, // Matches the container's width
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Padding(
@@ -85,20 +73,23 @@ class ProductsGrid extends StatelessWidget {
                         product.name,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                         maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
+                      const SizedBox(height: 4),
                       Text(
                         product.price,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
                         ),
                       ),
+                      const SizedBox(height: 4),
                       Text(
-                        'Stock: ${product.stock}',
-                        style: TextStyle(
+                        product.location,
+                        style: const TextStyle(
                           color: Colors.blueGrey,
                           fontSize: 10,
                         ),
@@ -111,6 +102,7 @@ class ProductsGrid extends StatelessWidget {
           ),
         );
       },
+    ),
     );
   }
 }
