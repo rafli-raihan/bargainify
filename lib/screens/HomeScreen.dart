@@ -32,10 +32,10 @@ class HomeScreen extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   child: 
-                Image.asset(
-                  heroProduct.imageAsset,
-                  fit: BoxFit.cover,
-                ),
+                  Image.asset(
+                    heroProduct.imageAsset,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 // Overlay with text
                 Container(

@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:bargainify/models/Product.dart';
-import 'package:bargainify/screens/%5Bid%5D/ProductScreen.dart';
+import 'package:bargainify/screens/[id]/ProductScreen.dart';
 
 class ProductsGrid extends StatelessWidget {
   final List<Product> products;
   const ProductsGrid({super.key, required this.products});
 
-  double getResponsivePadding(BuildContext context){
-    return ( MediaQuery.of(context).size.width < 1024 ) ? 2 : 30;
+  double getResponsivePadding(BuildContext context) {
+    return (MediaQuery.of(context).size.width < 1024) ? 2 : 30;
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(getResponsivePadding(context)),
-      child:
-      GridView.builder(
+      child: GridView.builder(
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 250, // Max width buat containernya
+          maxCrossAxisExtent: 250,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           childAspectRatio: 3 / 4,
@@ -32,7 +31,9 @@ class ProductsGrid extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProductScreen()),
+                MaterialPageRoute(
+                  builder: (context) => ProductScreen(product: product), // Pass the product here
+                ),
               );
             },
             child: Container(
