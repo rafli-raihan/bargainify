@@ -28,7 +28,7 @@ var productList = [
     price: 'Rp 10.000.000',
     imageAsset: 'images/rtx3080.jpg',
     imageUrls: [
-      'https://i.ebayimg.com/images/g/abc/s-l1600.jpg',
+      'https://i.pcmag.com/imagery/reviews/00WMjntQXPdEuyl1cpsBHMn-8.fit_scale.size_1028x578.v1622581812.jpg',
       'https://i.ebayimg.com/images/g/def/s-l1600.jpg',
       'https://i.ebayimg.com/images/g/ghi/s-l1600.jpg',
     ],
