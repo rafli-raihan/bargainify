@@ -28,7 +28,7 @@ class ProductScreen extends StatelessWidget {
               /* Konten utama */
               Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: 
                   Column(
                     children: [
@@ -53,13 +53,13 @@ class ProductScreen extends StatelessWidget {
                                   ),
                                   child: ConstrainedBox(
                                     constraints: const BoxConstraints(
-                                      maxWidth: 500,
-                                      maxHeight: 500,
+                                      maxWidth: 400,
+                                      maxHeight: 400,
                                     ),
                                     child: Image.network(
                                       url,
-                                      cacheHeight: 500,
-                                      cacheWidth: 500,
+                                      cacheHeight: 400,
+                                      cacheWidth: 400,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
