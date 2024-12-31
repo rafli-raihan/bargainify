@@ -191,7 +191,7 @@ class ProductScreen extends StatelessWidget {
   }
 
   void _showProductPurchaseSheet(BuildContext context, Product product) {
-    if (MediaQuery.of(context).size.width <= maxSize) {
+    if (MediaQuery.of(context).size.width <= 500) {
       showModalBottomSheet(
         context: context,
         builder: (context) {
