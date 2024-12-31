@@ -2,12 +2,13 @@ import 'package:bargainify/widgets/scrollables/ProductsGridView.dart';
 import 'package:flutter/material.dart';
 import 'package:bargainify/models/Product.dart';
 import 'dart:math';
+import 'package:carousel_slider/carousel_slider.dart';  // Import the carousel_slider package
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  double getResponsiveHeroHeight (BuildContext context){
-    return ( MediaQuery.of(context).size.width < 1024 ) ? 250 : 400;
+  double getResponsiveHeroHeight(BuildContext context) {
+    return (MediaQuery.of(context).size.width < 1024) ? 250 : 400;
   }
 
   @override
@@ -23,18 +24,31 @@ class HomeScreen extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),  
+            ),
             padding: EdgeInsets.all(8),
             height: getResponsiveHeroHeight(context),
             child: Stack(
               fit: StackFit.expand,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  child: 
-                  Image.asset(
-                    heroProduct.imageAsset,
-                    fit: BoxFit.cover,
+                CarouselSlider.builder(
+                  itemCount: productList.length,  // Assuming `productList` contains your products
+                  itemBuilder: (context, index, realIndex) {
+                    final Product product = productList[index];
+                    return ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      child: Image.asset(
+                        product.imageAsset,  // Display each product's image
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  },
+                  options: CarouselOptions(
+                    height: getResponsiveHeroHeight(context),
+                    aspectRatio: 1,
+                    viewportFraction: 1.0,
+                    enableInfiniteScroll: true,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
                   ),
                 ),
                 // Overlay with text
@@ -43,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Colors.black.withOpacity(0.5),
-                  ),                  
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
