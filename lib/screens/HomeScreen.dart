@@ -1,7 +1,6 @@
 import 'package:bargainify/widgets/scrollables/ProductsGridView.dart';
 import 'package:flutter/material.dart';
 import 'package:bargainify/models/Product.dart';
-import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';  // Import the carousel_slider package
 
 class HomeScreen extends StatelessWidget {
@@ -13,10 +12,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Random random = Random();
-    final int randomIndex = random.nextInt(productList.length); // Random index within the productList range
-    final Product heroProduct = productList[randomIndex];
-
     return Scaffold(
       body: ListView(
         children: [
@@ -25,33 +20,36 @@ class HomeScreen extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(10),
             height: getResponsiveHeroHeight(context),
             child: Stack(
               fit: StackFit.expand,
               children: [
                 CarouselSlider.builder(
-                  itemCount: productList.length,  // Assuming `productList` contains your products
+                  itemCount: productList.length, 
                   itemBuilder: (context, index, realIndex) {
                     final Product product = productList[index];
                     return ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      child: Image.asset(
-                        product.imageAsset,  // Display each product's image
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  },
-                  options: CarouselOptions(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Image.asset(
+                              product.imageAsset,
+                              fit: BoxFit.cover,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    options: CarouselOptions(
                     height: getResponsiveHeroHeight(context),
-                    aspectRatio: 1,
                     viewportFraction: 1.0,
                     enableInfiniteScroll: true,
                     autoPlay: true,
                     enlargeCenterPage: true,
                   ),
                 ),
-                // Overlay with text
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
