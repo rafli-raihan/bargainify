@@ -16,15 +16,6 @@ class ProductPhotosSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Align(
-          alignment: Alignment.topLeft,
-          child: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-        ),
         Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -50,13 +41,13 @@ class ProductPhotosSection extends StatelessWidget {
                           ),
                           child: ConstrainedBox(
                             constraints: const BoxConstraints(
-                              maxWidth: 400,
-                              maxHeight: 400,
+                              maxWidth: 500,
+                              maxHeight: 500,
                             ),
                             child: Image.network(
                               url,
-                              cacheHeight: 400,
-                              cacheWidth: 400,
+                              cacheHeight: 500,
+                              cacheWidth: 500,
                               fit: BoxFit.cover,
                             ),
                           ),
