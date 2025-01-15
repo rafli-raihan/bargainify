@@ -15,24 +15,22 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
+        leading: 
           IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back),
           ),
-        ],
       ),
       body: SafeArea(
-        child: ListView(
-          children: [
-            Center(
+        bottom: true,
+        child: Center(
               child: Container(
                 constraints: BoxConstraints(maxWidth: 900),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    if (constraints.maxWidth < 900) {
+                    if (constraints.maxWidth < 700) {
                       return SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
@@ -48,30 +46,22 @@ class ProductScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return ListView(
-                        shrinkWrap: true,
-                        children: [
-                          Container(
-                            height: 500,
-                            child: GridView.count(
-                              crossAxisCount: 2,
-                              children: <Widget>[
-                                Container(
-                                  constraints: BoxConstraints(maxHeight: 500),
-                                  child: ProductPhotosSection(product: product, maxSize: maxSize),
-                                ),
-                                Container(
-                                  constraints: BoxConstraints(maxHeight: 500, maxWidth: 500),
-                                  child: Column(
-                                    children: [
-                                      ProductDetailsSection(product: product, maxSize: maxSize),
-                                      _ActionButtons(
-                                        context: context,
-                                        product: product,
-                                        maxSize: maxSize,
-                                      ),
-                                    ],
-                                  ),
+                      return GridView.count(
+                          crossAxisCount: 2,
+                          children: <Widget>[
+                            Container(
+                              constraints: BoxConstraints(maxHeight: 500),
+                              child: ProductPhotosSection(product: product, maxSize: maxSize),
+                              ),
+                            Container(
+                              constraints: BoxConstraints(maxHeight: 500, maxWidth: 500),
+                              child: Column(
+                              children: [
+                                ProductDetailsSection(product: product, maxSize: maxSize),
+                                _ActionButtons(
+                                  context: context,
+                                  product: product,
+                                  maxSize: maxSize,
                                 ),
                               ],
                             ),
@@ -82,11 +72,9 @@ class ProductScreen extends StatelessWidget {
                   },
                 ),
               ),
-            ),
-          ],
         ),
       ),
-      bottomNavigationBar: MediaQuery.of(context).size.width <= 900
+      bottomNavigationBar: MediaQuery.of(context).size.width <= 700
         ? Container(
           height: 50,
           child: _ActionButtons(
@@ -117,7 +105,7 @@ class _ActionButtons extends StatelessWidget {
       alignment: Alignment.center,
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: MediaQuery.of(context).size.width < 900
+        color: MediaQuery.of(context).size.width < 700
         ? Colors.white.withOpacity(1)
         : Colors.transparent,
       ),
