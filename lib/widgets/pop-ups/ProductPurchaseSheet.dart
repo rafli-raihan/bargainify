@@ -25,14 +25,14 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
       left: 0,
       right: 0,
       child: Container(
-        height: MediaQuery.of(context).size.height / 2, // Half screen height
+        height: MediaQuery.of(context).size.height / 2,
         color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               ListView(
-                shrinkWrap: true, // To prevent the ListView from expanding indefinitely
+                shrinkWrap: true,
                 children: [
                   Text(
                     'Beli Produk: ${widget.productName}',

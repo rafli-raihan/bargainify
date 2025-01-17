@@ -18,7 +18,7 @@ class ProductPhotosSection extends StatelessWidget {
       children: <Widget>[
         Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
               CarouselSlider.builder(
