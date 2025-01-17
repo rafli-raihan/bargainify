@@ -7,9 +7,10 @@ import 'ProductDetailsSection.dart';
 
 class ProductScreen extends StatelessWidget {
   final Product product;
-  final double maxSize = 400;
-  
+
   const ProductScreen({super.key, required this.product});
+
+  final double maxSize = 400;
 
   @override
   Widget build(BuildContext context) {
