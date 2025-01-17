@@ -32,13 +32,13 @@ class ProductsGrid extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductScreen(product: product), // Pass the product here
+                  builder: (context) => ProductScreen(product: product),
                 ),
               );
             },
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surfaceContainerLow,
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
@@ -89,8 +89,8 @@ class ProductsGrid extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           product.location,
-                          style: const TextStyle(
-                            color: Colors.blueGrey,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
                             fontSize: 10,
                           ),
                         ),

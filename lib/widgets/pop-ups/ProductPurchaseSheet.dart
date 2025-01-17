@@ -26,7 +26,7 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
       right: 0,
       child: Container(
         height: MediaQuery.of(context).size.height / 2,
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface.withOpacity(1),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

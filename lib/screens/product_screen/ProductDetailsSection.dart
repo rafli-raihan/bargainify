@@ -70,7 +70,7 @@ class ProductDetailsSection extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w400,
-                          color: Colors.blueGrey,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                     ],
