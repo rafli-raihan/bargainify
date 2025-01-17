@@ -20,12 +20,9 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        height: MediaQuery.of(context).size.height / 2,
+    return 
+      Container(
+        height: MediaQuery.of(context).size.height * 0.75,
         color: Theme.of(context).colorScheme.surface.withOpacity(1),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -79,7 +76,6 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -89,7 +85,6 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
             ],
           ),
         ),
-      ),
     );
   }
 

@@ -21,7 +21,7 @@ class ActionButtons extends StatelessWidget {
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
         color: MediaQuery.of(context).size.width < 700
-        ? Theme.of(context).colorScheme.surface.withOpacity(1)
+        ? Theme.of(context).colorScheme.surface.withOpacity(0.9)
         : Colors.transparent,
       ),
       child: ConstrainedBox(
