@@ -65,6 +65,7 @@ class ActionButtons extends StatelessWidget {
     if (MediaQuery.of(context).size.width <= 500) {
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (context) {
           return ProductPurchaseSheet(
             productName: product.name,
