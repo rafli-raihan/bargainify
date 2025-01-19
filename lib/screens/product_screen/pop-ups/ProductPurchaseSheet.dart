@@ -82,7 +82,9 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
                               decoration: const InputDecoration(
                                 hintText: 'Masukkan harga tawar',
                                 prefixText: 'Rp ',
-                                border: OutlineInputBorder(),
+                                border: OutlineInputBorder(
+                                   borderRadius: const BorderRadius.all(Radius.circular(25)),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 16),
