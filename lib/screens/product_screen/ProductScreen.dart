@@ -5,12 +5,24 @@ import 'ProductPhotosSection.dart';
 import 'ProductDetailsSection.dart';
 import 'ActionButtons.dart';  
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   final Product product;
 
   const ProductScreen({super.key, required this.product});
 
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
   final double maxSize = 400;
+  String? submittedBargainPrice;
+
+  void updateSubmittedPrice(String price) {
+    setState(() {
+      submittedBargainPrice = price;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +47,12 @@ class ProductScreen extends StatelessWidget {
                       return SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
-                              ProductPhotosSection(product: product, maxSize: maxSize),
+                              ProductPhotosSection(product: widget.product, maxSize: maxSize),
                               Container(
                                 constraints: BoxConstraints(maxWidth: 500),
                                 child: Padding(                                  
                                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-                                child: ProductDetailsSection(product: product, maxSize: maxSize),
+                                child: ProductDetailsSection(product: widget.product, maxSize: maxSize, submittedBargainPrice: submittedBargainPrice,),
                               ),
                             ),
                           ],
@@ -50,16 +62,17 @@ class ProductScreen extends StatelessWidget {
                       return GridView.count(
                         crossAxisCount: 2,
                         children: <Widget>[
-                          ProductPhotosSection(product: product, maxSize: maxSize),
+                          ProductPhotosSection(product: widget.product, maxSize: maxSize),
                           Container(
                             constraints: BoxConstraints(maxHeight: 1600, maxWidth: 500),
                             child: Column(
                             children: [
-                              ProductDetailsSection(product: product, maxSize: maxSize),
+                              ProductDetailsSection(product: widget.product, maxSize: maxSize, submittedBargainPrice: submittedBargainPrice,),
                               ActionButtons(
                                 context: context,
-                                product: product,
+                                product: widget.product,
                                 maxSize: maxSize,
+                                onBargainSubmitted: updateSubmittedPrice,
                             ),
                           ],
                         ),
@@ -77,8 +90,9 @@ class ProductScreen extends StatelessWidget {
           height: 50,
           child: ActionButtons(
             context: context,
-            product: product,
+            product: widget.product,
             maxSize: maxSize,
+            onBargainSubmitted: updateSubmittedPrice,
           ),
         )
         : null,

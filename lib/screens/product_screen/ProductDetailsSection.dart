@@ -4,11 +4,13 @@ import 'package:bargainify/models/Product.dart';
 class ProductDetailsSection extends StatelessWidget {
   final Product product;
   final double maxSize;
+  final String? submittedBargainPrice;
 
   const ProductDetailsSection({
     Key? key,
     required this.product,
     required this.maxSize,
+    this.submittedBargainPrice,
   }) : super(key: key);
 
   @override
@@ -38,6 +40,26 @@ class ProductDetailsSection extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+              if (submittedBargainPrice != null && submittedBargainPrice!.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    submittedBargainPrice != product.price
+                        ? 'Anda telah mengajukan harga tawaran anda:\nRp $submittedBargainPrice'
+                        : 'Anda telah mengajukan pembelian tanpa harga tawar',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                 ),
               ),
             ],

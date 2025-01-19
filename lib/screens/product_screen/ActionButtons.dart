@@ -7,11 +7,13 @@ class ActionButtons extends StatelessWidget {
   final BuildContext context;
   final Product product;
   final double maxSize;
+  final Function(String) onBargainSubmitted;
 
   const ActionButtons({
     required this.context,
     required this.product,
     required this.maxSize,
+    required this.onBargainSubmitted,
   });
 
   @override
@@ -69,6 +71,7 @@ class ActionButtons extends StatelessWidget {
           productName: product.name,
           price: product.price,
           bargainify: product.bargainify,
+          onBargainSubmitted: onBargainSubmitted,
         ),
       );
     } else {
@@ -80,6 +83,7 @@ class ActionButtons extends StatelessWidget {
             productName: product.name,
             price: product.price,
             bargainify: product.bargainify,
+            onBargainSubmitted: onBargainSubmitted,
           );
         },
       );

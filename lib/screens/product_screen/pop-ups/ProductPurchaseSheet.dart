@@ -4,11 +4,13 @@ class ProductPurchaseSheet extends StatefulWidget {
   final String productName;
   final String price;
   final bool bargainify;
+  final Function(String) onBargainSubmitted;
 
   ProductPurchaseSheet({
     required this.productName,
     required this.price,
     required this.bargainify,
+    required this.onBargainSubmitted,
   });
 
   @override
@@ -17,6 +19,8 @@ class ProductPurchaseSheet extends StatefulWidget {
 
 class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
   final TextEditingController _bargainController = TextEditingController();
+  bool _hasBargainSubmitted = false;
+  String _submittedBargainPrice = '';
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
               ),
             ),
             Flexible(
-              fit: FlexFit.loose, // ini kalo di tailwind buat h-max-content
+              fit: FlexFit.loose,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -63,7 +67,7 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 16),
-                      if (widget.bargainify)
+                      if (widget.bargainify && !_hasBargainSubmitted)
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -76,22 +80,51 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
                               keyboardType: TextInputType.number,
                               decoration: const InputDecoration(
                                 hintText: 'Masukkan harga tawar',
+                                prefixText: 'Rp ',
+                                border: OutlineInputBorder(),
                               ),
                             ),
                             const SizedBox(height: 16),
                           ],
                         ),
+                      if (_hasBargainSubmitted)
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          margin: EdgeInsets.only(bottom: 16),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            'Anda telah mengajukan harga tawaran anda:\nRp $_submittedBargainPrice',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ),
                       ElevatedButton(
                         onPressed: () {
-                          if (widget.bargainify && _bargainController.text.isNotEmpty) {
+                          if (!widget.bargainify) {
+                            // For unbargainable products, submit original price
+                            _submitOriginalPrice();
+                          } else if (_bargainController.text.isNotEmpty && !_hasBargainSubmitted) {
+                            // For bargainable products with input
                             _submitBargain();
                           } else {
+                            // For checkout
                             _checkout();
                           }
                         },
-                        child: Text(widget.bargainify
-                            ? (_bargainController.text.isEmpty ? 'Checkout' : 'Submit Tawar')
-                            : 'Checkout'),
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 45),
+                        ),
+                        child: Text(
+                          !widget.bargainify ? 'Checkout' :
+                          (_hasBargainSubmitted ? 'Checkout' : 
+                          (_bargainController.text.isEmpty ? 'Checkout' : 'Submit Tawar')),
+                          style: const TextStyle(fontSize: 16),
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
@@ -110,14 +143,30 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
     );
   }
 
-  void _submitBargain() {
-    final bargainPrice = _bargainController.text;
-    print('Harga tawar yang diajukan: $bargainPrice');
+  @override
+  void dispose() {
+    _bargainController.dispose();
+    super.dispose();
+  }
+
+  void _submitOriginalPrice() {
+    widget.onBargainSubmitted(widget.price);
     Navigator.of(context).pop();
   }
 
+  void _submitBargain() {
+    final bargainPrice = _bargainController.text;
+    setState(() {
+      _hasBargainSubmitted = true;
+      _submittedBargainPrice = bargainPrice;
+    });
+    widget.onBargainSubmitted(bargainPrice);
+  }
+
   void _checkout() {
-    print('Checkout dengan harga: ${widget.price}');
+    if (!widget.bargainify) {
+      widget.onBargainSubmitted(widget.price);
+    }
     Navigator.of(context).pop();
   }
 }
