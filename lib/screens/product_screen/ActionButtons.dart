@@ -1,6 +1,6 @@
 import 'package:bargainify/models/Product.dart';
-import 'package:bargainify/widgets/pop-ups/ProductPurchasePopUp.dart';
-import 'package:bargainify/widgets/pop-ups/ProductPurchaseSheet.dart';
+import 'package:bargainify/screens/product_screen/pop-ups/ProductPurchasePopUp.dart';
+import 'package:bargainify/screens/product_screen/pop-ups/ProductPurchaseSheet.dart';
 import 'package:flutter/material.dart';
 
 class ActionButtons extends StatelessWidget {

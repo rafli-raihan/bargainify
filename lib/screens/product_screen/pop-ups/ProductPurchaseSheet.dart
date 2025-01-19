@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../libs/product_purchase_handler.dart';
 
 class ProductPurchaseSheet extends StatefulWidget {
   final String productName;
@@ -105,14 +106,11 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
                         ),
                       ElevatedButton(
                         onPressed: () {
-                          if (!widget.bargainify) {
-                            // For unbargainable products, submit original price
+                          if (!widget.bargainify || _bargainController.text.isEmpty) {
                             _submitOriginalPrice();
                           } else if (_bargainController.text.isNotEmpty && !_hasBargainSubmitted) {
-                            // For bargainable products with input
                             _submitBargain();
                           } else {
-                            // For checkout
                             _checkout();
                           }
                         },
@@ -150,23 +148,31 @@ class _ProductPurchaseSheetState extends State<ProductPurchaseSheet> {
   }
 
   void _submitOriginalPrice() {
-    widget.onBargainSubmitted(widget.price);
-    Navigator.of(context).pop();
+    ProductPurchaseHandler.submitOriginalPrice(
+      context,
+      widget.price,
+      widget.onBargainSubmitted,
+    );
   }
 
   void _submitBargain() {
-    final bargainPrice = _bargainController.text;
-    setState(() {
-      _hasBargainSubmitted = true;
-      _submittedBargainPrice = bargainPrice;
-    });
-    widget.onBargainSubmitted(bargainPrice);
+    ProductPurchaseHandler.submitBargain(
+      _bargainController.text,
+      setState,
+      widget.onBargainSubmitted,
+      (String price) {
+        _hasBargainSubmitted = true;
+        _submittedBargainPrice = price;
+      },
+    );
   }
 
   void _checkout() {
-    if (!widget.bargainify) {
-      widget.onBargainSubmitted(widget.price);
-    }
-    Navigator.of(context).pop();
+    ProductPurchaseHandler.checkout(
+      context,
+      widget.bargainify,
+      widget.price,
+      widget.onBargainSubmitted,
+    );
   }
 }
