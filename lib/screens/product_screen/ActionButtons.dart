@@ -62,7 +62,16 @@ class ActionButtons extends StatelessWidget {
   }
 
   void _showProductPurchaseSheet(BuildContext context, Product product) {
-    if (MediaQuery.of(context).size.width <= 500) {
+    if (MediaQuery.of(context).size.width >= 500 && MediaQuery.of(context).size.height >= 500) {
+      showDialog(
+        context: context,
+        builder: (context) => ProductPurchasePopUp(
+          productName: product.name,
+          price: product.price,
+          bargainify: product.bargainify,
+        ),
+      );
+    } else {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -73,15 +82,6 @@ class ActionButtons extends StatelessWidget {
             bargainify: product.bargainify,
           );
         },
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => ProductPurchasePopUp(
-          productName: product.name,
-          price: product.price,
-          bargainify: product.bargainify,
-        ),
       );
     }
   }
