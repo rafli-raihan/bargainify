@@ -42,9 +42,7 @@ class MainView extends StatelessWidget {
                 ),
               ],
             ),
-            body: Flexible(
-              child: HomeScreen(),
-            ),
+            body: HomeScreen(),
           ),
         );
       },

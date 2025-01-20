@@ -14,8 +14,7 @@ class ProductPhotosSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
+    return
         Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -64,9 +63,7 @@ class ProductPhotosSection extends StatelessWidget {
                 ),
               ),
             ],
-          ),
         ),
-      ],
     );
   }
 }
