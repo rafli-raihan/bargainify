@@ -66,7 +66,6 @@ class _ProductScreenState extends State<ProductScreen> {
                           children: [
                             ProductDetailsSection(product: widget.product, maxSize: maxSize, submittedBargainPrice: submittedBargainPrice,),
                             ActionButtons(
-                              context: context,
                               product: widget.product,
                               maxSize: maxSize,
                               onBargainSubmitted: updateSubmittedPrice,
@@ -85,7 +84,6 @@ class _ProductScreenState extends State<ProductScreen> {
         ? Container(
           height: 50,
           child: ActionButtons(
-            context: context,
             product: widget.product,
             maxSize: maxSize,
             onBargainSubmitted: updateSubmittedPrice,

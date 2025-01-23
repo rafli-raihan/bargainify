@@ -6,8 +6,15 @@ void main() {
   runApp(MainView());
 }
 
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   const MainView({super.key});
+
+  @override
+  State<MainView> createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  bool _showSearch = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +34,35 @@ class MainView extends StatelessWidget {
         return MaterialApp(
           theme: ThemeData(colorScheme: lightColorScheme, useMaterial3: true),
           darkTheme: ThemeData(colorScheme: darkColorScheme, useMaterial3: true),
-          title: "firstApp",
+          title: "bargainify",
           home: Scaffold(
             appBar: AppBar(
-              title: Text("Bargainify"),
+              title: _showSearch
+                  ? TextField(
+                      autofocus: true,
+                      decoration: InputDecoration(
+                        hintText: 'Search belum di implementasi, hanya demo untuk show/hide searchbar saja :)',
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(25)),
+                        ),
+                        hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+                      ),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                      onSubmitted: (value) {
+                        setState(() {
+                          _showSearch = false;
+                        });
+                      },
+                    )
+                  : Text("Bargainify"),
               actions: [
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.menu),
+                  onPressed: () {
+                    setState(() {
+                      _showSearch = !_showSearch;
+                    });
+                  },
+                  icon: Icon(_showSearch ? Icons.close : Icons.search),
                 ),
               ],
             ),

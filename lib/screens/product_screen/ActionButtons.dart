@@ -4,13 +4,11 @@ import 'package:bargainify/screens/product_screen/pop-ups/ProductPurchaseSheet.d
 import 'package:flutter/material.dart';
 
 class ActionButtons extends StatelessWidget {
-  final BuildContext context;
   final Product product;
   final double maxSize;
   final Function(String) onBargainSubmitted;
 
   const ActionButtons({
-    required this.context,
     required this.product,
     required this.maxSize,
     required this.onBargainSubmitted,
@@ -43,7 +41,8 @@ class ActionButtons extends StatelessWidget {
                 icon: Icon(Icons.chat_bubble_rounded),
               ),
             ),
-            Expanded(
+            Flexible(
+              fit: FlexFit.tight, 
               child: ElevatedButton.icon(
                 onPressed: () => _showProductPurchaseSheet(context, product), 
                 icon:Icon(Icons.shopping_bag_rounded),
