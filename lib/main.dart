@@ -45,7 +45,6 @@ class _MainViewState extends State<MainView> {
                         border: OutlineInputBorder(
                           borderRadius: const BorderRadius.all(Radius.circular(25)),
                         ),
-                        hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
                       ),
                       style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       onSubmitted: (value) {
