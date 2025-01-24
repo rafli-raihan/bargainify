@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "Temukan barang yang anda inginkan dengan harga yang fantastis",
+                        "Temukan barang-barang yang anda cari, dengan harga yang anda inginkan",
                         style: TextStyle(
                           fontSize: 14.0,
                           color: Colors.white,
