@@ -1,7 +1,7 @@
 import 'package:bargainify/widgets/scrollables/ProductsGridView.dart';
 import 'package:flutter/material.dart';
 import 'package:bargainify/models/Product.dart';
-import 'package:carousel_slider/carousel_slider.dart';  // Import the carousel_slider package
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
