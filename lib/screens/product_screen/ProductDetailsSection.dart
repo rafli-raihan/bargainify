@@ -22,6 +22,7 @@ class ProductDetailsSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,9 +102,13 @@ class ProductDetailsSection extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            product.description,
-            style: const TextStyle(fontSize: 16.0),
+          Flexible(
+            child: SingleChildScrollView(
+              child: Text(
+                product.description,
+                style: const TextStyle(fontSize: 16.0),
+              ),
+            ),
           ),
         ],
       ),

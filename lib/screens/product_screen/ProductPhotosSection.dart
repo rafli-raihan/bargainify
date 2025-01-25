@@ -40,13 +40,13 @@ class ProductPhotosSection extends StatelessWidget {
                           ),
                           child: ConstrainedBox(
                             constraints: const BoxConstraints(
-                              maxWidth: 500,
-                              maxHeight: 500,
+                              maxWidth: 512,
+                              maxHeight: 512,
                             ),
                             child: Image.network(
                               url,
-                              cacheHeight: 500,
-                              cacheWidth: 500,
+                              cacheHeight: 512,
+                              cacheWidth: 512,
                               fit: BoxFit.cover,
                             ),
                           ),

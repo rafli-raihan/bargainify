@@ -62,25 +62,40 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                     );
                   } else {
-                    return GridView.count(
-                      crossAxisCount: 2,
-                      children: <Widget>[
-                        ProductPhotosSection(product: widget.product, maxSize: maxSize),
-                        Flexible(
-                          fit: FlexFit.loose,
+                  return Row( 
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: ProductPhotosSection(
+                        product: widget.product, 
+                        maxSize: maxSize
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Column(
-                          children: [
-                            ProductDetailsSection(product: widget.product, maxSize: maxSize, submittedBargainPrice: submittedBargainPrice,),
-                            ActionButtons(
-                              product: widget.product,
-                              maxSize: maxSize,
-                              onBargainSubmitted: updateSubmittedPrice,
+                            children: [
+                              ProductDetailsSection(
+                                product: widget.product,
+                                maxSize: maxSize,
+                                submittedBargainPrice: submittedBargainPrice,
+                              ),
+                              ActionButtons(
+                                product: widget.product,
+                                maxSize: maxSize,
+                                onBargainSubmitted: updateSubmittedPrice,
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
-                );               
+                );        
               }
             },
           ),
