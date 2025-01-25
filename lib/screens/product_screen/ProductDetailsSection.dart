@@ -17,7 +17,8 @@ class ProductDetailsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
-        maxWidth: maxSize
+        maxWidth: maxSize,
+        maxHeight: MediaQuery.of(context).size.width > 800 ? 400 : double.infinity,
       ),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
