@@ -34,6 +34,12 @@ class _ProductScreenState extends State<ProductScreen> {
             },
             icon: const Icon(Icons.arrow_back),
           ),
+        actions: [
+          IconButton(
+            onPressed: null,
+            icon: Icon(Icons.share_rounded),
+          ),
+        ],
       ),
       body: Center(
           child: Container(

@@ -31,16 +31,9 @@ class ActionButtons extends StatelessWidget {
               : MediaQuery.of(context).size.width,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-              child: IconButton(
-                onPressed: null,
-                icon: Icon(Icons.chat_bubble_rounded),
-              ),
-            ),
             Flexible(
               fit: FlexFit.tight, 
               child: ElevatedButton.icon(
@@ -49,12 +42,9 @@ class ActionButtons extends StatelessWidget {
                 label: const Text("Beli"),
               )
             ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-              child: IconButton(
+            IconButton(
                 onPressed: null,
-                icon: Icon(Icons.share_rounded),
-              ),
+                icon: Icon(Icons.chat_bubble_rounded),
             ),
           ],
         ),
