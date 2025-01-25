@@ -62,40 +62,40 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                     );
                   } else {
-                  return Row( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Flexible(
-                      flex: 1,
-                      child: ProductPhotosSection(
-                        product: widget.product, 
-                        maxSize: maxSize
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                            children: [
-                              ProductDetailsSection(
-                                product: widget.product,
-                                maxSize: maxSize,
-                                submittedBargainPrice: submittedBargainPrice,
-                              ),
-                              ActionButtons(
-                                product: widget.product,
-                                maxSize: maxSize,
-                                onBargainSubmitted: updateSubmittedPrice,
-                              ),
-                            ],
-                          ),
+                  return SingleChildScrollView(
+                    child: Row( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Flexible(
+                        flex: 1,
+                        child: ProductPhotosSection(
+                          product: widget.product, 
+                          maxSize: maxSize
                         ),
                       ),
-                    ),
-                  ],
-                );        
+                      Flexible(
+                        flex: 1,
+                        child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Column(
+                              children: [
+                                ProductDetailsSection(
+                                  product: widget.product,
+                                  maxSize: maxSize,
+                                  submittedBargainPrice: submittedBargainPrice,
+                                ),
+                                ActionButtons(
+                                  product: widget.product,
+                                  maxSize: maxSize,
+                                  onBargainSubmitted: updateSubmittedPrice,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                    ],
+                                    ),
+                  );        
               }
             },
           ),
